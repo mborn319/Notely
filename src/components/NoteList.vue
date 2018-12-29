@@ -6,7 +6,7 @@
 		>
 		<div class="message-header">
 			{{ note.title }}
-			<button class="delete" aria-label="delete"></button>
+			<button class="delete" aria-label="delete" v-on:click.prevent="$emit('delete-note',note)"></button>
 		</div>
 		<div class="message-body">
 			{{ note.body }}

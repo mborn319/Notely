@@ -4,7 +4,10 @@
     <NoteForm v-on:new-note="addNewNote" />
   </div>
   <div class="section">
-    <NoteList v-bind:notes="notes" />
+    <NoteList 
+      v-bind:notes="notes"
+      v-on:delete-note="deleteNote"
+      />
   </div>
   </div>
 </template>
@@ -27,8 +30,13 @@ export default {
   },
   methods: {
     addNewNote: function( note ) {
-      console.log("addNewNote", note);
+			note.id = Math.random() * 10000000;
       this.notes.push( note );
+    },
+    deleteNote: function( noteToDelete ) {
+      this.notes = this.notes.filter(value => {
+        return value.id !== noteToDelete.id;
+      });
     }
   }
 }
