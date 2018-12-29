@@ -4,7 +4,7 @@
     <NoteForm />
   </div>
   <div class="section">
-    <NoteList />
+    <NoteList v-model="notes" />
   </div>
   </div>
 </template>
@@ -16,6 +16,11 @@ import './../node_modules/bulma/css/bulma.css';
 
 export default {
   name: 'app',
+  data: () => {
+    return {
+      notes: []
+    }
+  },
   components: {
     NoteForm,
     NoteList
@@ -24,12 +29,4 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
