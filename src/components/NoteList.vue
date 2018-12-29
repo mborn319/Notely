@@ -9,7 +9,7 @@
 			<button class="delete" aria-label="delete" v-on:click.prevent="$emit('delete-note',note)"></button>
 		</div>
 		<div class="message-body">
-			{{ note.body }}
+			{{ note.body }} <button class="button is-text is-pulled-right" v-on:click="$emit('edit-note',note)">Edit</button>
 		</div>
 	</article>
 </div>

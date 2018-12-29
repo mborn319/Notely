@@ -9,7 +9,7 @@
 		<div class="control"><textarea class="textarea" id="noteField" v-model="body"></textarea></div>
 	</div>
 	<div class="field is-grouped is-horizontal">
-		<div class="control"><button type="submit" class="button is-link">Add Note</button></div>
+		<div class="control"><button type="submit" class="button is-link">Save</button></div>
 		<div class="control"><button type="reset" class="button is-text">Reset</button></div>
 	</div>
 </form>
@@ -18,10 +18,13 @@
 <script>
 export default {
 	name: "NoteForm",
+	props: {
+		note: Object
+	},
 	data: () => {
 		return {
-			body: "",
-			title: ""
+			title: "",
+			body: ""
 		}
 	},
 	methods: {
@@ -30,7 +33,7 @@ export default {
 				title: this.title,
 				body: this.body
 			};
-			this.$emit('new-note',newNote);
+			this.$emit('save-note',newNote);
 
 			// now clear the form!
 			this.title = "";

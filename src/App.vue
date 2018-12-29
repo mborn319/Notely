@@ -1,12 +1,16 @@
 <template>
   <div id="app">
   <div class="section">
-    <NoteForm v-on:new-note="addNewNote" />
+    <NoteForm
+      v-bind:note="form"
+      v-on:save-note="saveNote"
+      />
   </div>
   <div class="section">
     <NoteList 
       v-bind:notes="notes"
       v-on:delete-note="deleteNote"
+      v-on:edit-note="editNote"
       />
   </div>
   </div>
@@ -21,7 +25,11 @@ export default {
   name: 'app',
   data: () => {
     return {
-      notes: []
+      notes: [],
+      form: {
+        title: "",
+        body: ""
+      }
     }
   },
   components: {
@@ -35,6 +43,18 @@ export default {
     }
   },
   methods: {
+    saveNote: function( note ) {
+      if ( note.hasOwnProperty("id") && note.id !== "" ) {
+        this.updateExistingNote( note );
+      } else {
+        this.addNewNote( note );
+      }
+    },
+    updateExistingNote: function( note ) {
+      this.notes = this.notes.filter(value => {
+        return value.id !== noteToDelete.id;
+      });
+    },
     addNewNote: function( note ) {
 			note.id = Math.random() * 10000000;
       this.notes.push( note );
@@ -43,6 +63,10 @@ export default {
       this.notes = this.notes.filter(value => {
         return value.id !== noteToDelete.id;
       });
+    },
+    editNote: function( noteToEdit ) {
+      console.log( noteToEdit, this.form );
+      this.form = noteToEdit;
     }
   },
   watch: {
