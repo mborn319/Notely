@@ -1,5 +1,5 @@
 <template>
-<form v-on:submit.prevent="$emit('new-note',submittedNote)">
+<form v-on:submit.prevent="submitNote">
 	<div class="field is-horizontal">
 		<label for="titleField" class="label">Title</label>
 		<div class="control"><input type="text" id="titleField" v-model="title"></div>
@@ -24,12 +24,17 @@ export default {
 			title: ""
 		}
 	},
-	computed: {
-		submittedNote: function() {
-			return {
+	methods: {
+		submitNote: function() {
+			var newNote = {
 				title: this.title,
 				body: this.body
-			}
+			};
+			this.$emit('new-note',newNote);
+
+			// now clear the form!
+			this.title = "";
+			this.body = "";
 		}
 	}
 }
