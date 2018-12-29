@@ -1,10 +1,10 @@
 <template>
   <div id="app">
   <div class="section">
-    <NoteForm />
+    <NoteForm v-on:new-note="addNewNote" />
   </div>
   <div class="section">
-    <NoteList v-model="notes" />
+    <NoteList v-bind:notes="notes" />
   </div>
   </div>
 </template>
@@ -24,6 +24,12 @@ export default {
   components: {
     NoteForm,
     NoteList
+  },
+  methods: {
+    addNewNote: function( note ) {
+      console.log("addNewNote", note);
+      this.notes.push( note );
+    }
   }
 }
 </script>
