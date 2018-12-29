@@ -28,6 +28,12 @@ export default {
     NoteForm,
     NoteList
   },
+  mounted: function() {
+    var storedNotes = localStorage.getItem('app-notes');
+    if ( storedNotes ) {
+      this.notes = JSON.parse( storedNotes );
+    }
+  },
   methods: {
     addNewNote: function( note ) {
 			note.id = Math.random() * 10000000;
@@ -37,6 +43,11 @@ export default {
       this.notes = this.notes.filter(value => {
         return value.id !== noteToDelete.id;
       });
+    }
+  },
+  watch: {
+    notes: function() {
+      localStorage.setItem( 'app-notes',JSON.stringify( this.notes ) );
     }
   }
 }
