@@ -6,6 +6,7 @@
 
 <script>
 import NoteForm from './components/NoteForm.vue';
+import './../node_modules/bulma/css/bulma.css';
 
 export default {
   name: 'app',
